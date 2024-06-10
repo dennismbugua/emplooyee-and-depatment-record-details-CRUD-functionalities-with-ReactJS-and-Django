@@ -1,13 +1,75 @@
-body {
+/* Ensure the background color covers the entire page */
+body, html {
+  height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9f9f9;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Home container to center content */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Centered text and margins */
+.text-center {
+  text-align: center;
+}
+
+.my-4 {
+  margin: 2rem 0;
+}
+
+/* Responsive home content styling */
+.home-content {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center align text */
+}
+
+.home-content p {
+  margin-bottom: 1rem;
+}
+
+/* Quick links styling */
+.quick-links {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.quick-links li {
+  margin: 0 10px;
+}
+
+.quick-links li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.quick-links li a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .quick-links {
+    flex-direction: column;
+  }
+
+  .quick-links li {
+    margin: 10px 0;
+  }
 }
