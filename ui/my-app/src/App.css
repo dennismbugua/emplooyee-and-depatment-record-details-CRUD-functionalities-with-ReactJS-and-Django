@@ -1,38 +1,42 @@
-.App {
-  text-align: center;
-}
+/* Add media queries for responsive navigation */
+@media (max-width: 768px) {
+  .navbar-nav {
+    display: none; /* Hide the nav items on small screens */
+  }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+  .navbar-nav.show {
+    display: block; /* Show the nav items when toggled */
+  }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .navbar-toggler {
+    display: block; /* Show the toggle button on small screens */
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.navbar-toggler {
+  display: none; /* Hide the toggle button by default */
+  background-color: #007bff;
+  border: none;
   color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-toggler:focus {
+  outline: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dropdown-menu {
+  display: none; /* Hide dropdown menu by default */
+}
+
+.dropdown.show .dropdown-menu {
+  display: block; /* Show dropdown menu when toggled */
+  position: absolute; /* Ensure the dropdown is positioned correctly */
+  top: 100%; /* Align the dropdown menu with the bottom of the toggle button */
+  left: 0; /* Align the dropdown menu to the left */
+  width: 100%; /* Make sure the dropdown menu spans the width of the container */
+  background-color: white; /* Set background color to white */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for visibility */
 }
