@@ -1,7 +1,7 @@
-import React from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import React from "react";
+import { useDrag, useDrop } from "react-dnd";
 
-const ItemType = 'ROW';
+const ItemType = "ROW";
 
 const DraggableRow = ({ id, index, moveRow, children }) => {
   const ref = React.useRef(null);
@@ -24,7 +24,8 @@ const DraggableRow = ({ id, index, moveRow, children }) => {
       const hoverBoundingRect = ref.current.getBoundingClientRect();
 
       // Get vertical middle
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();

@@ -1,69 +1,75 @@
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
-from django.http.response import JsonResponse
+# EmployeeApp/views.py
 
-from EmployeeApp.models import Departments,Employees
-from EmployeeApp.serializers import DepartmentSerializer,EmployeeSerializer
-
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Departments, Employees
+from .serializers import DepartmentSerializer, EmployeeSerializer
 from django.core.files.storage import default_storage
 
-# Create your views here.
 
-@csrf_exempt
-def departmentApi(request,id=0):
-    if request.method=='GET':
-        departments = Departments.objects.all()
-        departments_serializer=DepartmentSerializer(departments,many=True)
-        return JsonResponse(departments_serializer.data,safe=False)
-    elif request.method=='POST':
-        department_data=JSONParser().parse(request)
-        departments_serializer=DepartmentSerializer(data=department_data)
-        if departments_serializer.is_valid():
-            departments_serializer.save()
-            return JsonResponse("Added Successfully",safe=False)
-        return JsonResponse("Failed to Add",safe=False)
-    elif request.method=='PUT':
-        department_data=JSONParser().parse(request)
-        department=Departments.objects.get(DepartmentId=department_data['DepartmentId'])
-        departments_serializer=DepartmentSerializer(department,data=department_data)
-        if departments_serializer.is_valid():
-            departments_serializer.save()
-            return JsonResponse("Updated Successfully",safe=False)
-        return JsonResponse("Failed to Update")
-    elif request.method=='DELETE':
-        department=Departments.objects.get(DepartmentId=id)
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def departmentApi(request, id=None):
+    if request.method == 'GET':
+        if id:
+            department = Departments.objects.get(DepartmentId=id)
+            serializer = DepartmentSerializer(department)
+            return Response(serializer.data)
+        else:
+            departments = Departments.objects.all()
+            serializer = DepartmentSerializer(departments, many=True)
+            return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = DepartmentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        department = Departments.objects.get(DepartmentId=id)
+        serializer = DepartmentSerializer(department, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        department = Departments.objects.get(DepartmentId=id)
         department.delete()
-        return JsonResponse("Deleted Successfully",safe=False)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-@csrf_exempt
-def employeeApi(request,id=0):
-    if request.method=='GET':
-        employees = Employees.objects.all()
-        employees_serializer=EmployeeSerializer(employees,many=True)
-        return JsonResponse(employees_serializer.data,safe=False)
-    elif request.method=='POST':
-        employee_data=JSONParser().parse(request)
-        employees_serializer=EmployeeSerializer(data=employee_data)
-        if employees_serializer.is_valid():
-            employees_serializer.save()
-            return JsonResponse("Added Successfully",safe=False)
-        return JsonResponse("Failed to Add",safe=False)
-    elif request.method=='PUT':
-        employee_data=JSONParser().parse(request)
-        employee=Employees.objects.get(EmployeeId=employee_data['EmployeeId'])
-        employees_serializer=EmployeeSerializer(employee,data=employee_data)
-        if employees_serializer.is_valid():
-            employees_serializer.save()
-            return JsonResponse("Updated Successfully",safe=False)
-        return JsonResponse("Failed to Update")
-    elif request.method=='DELETE':
-        employee=Employees.objects.get(EmployeeId=id)
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def employeeApi(request, id=None):
+    if request.method == 'GET':
+        if id:
+            employee = Employees.objects.get(EmployeeId=id)
+            serializer = EmployeeSerializer(employee)
+            return Response(serializer.data)
+        else:
+            employees = Employees.objects.all()
+            serializer = EmployeeSerializer(employees, many=True)
+            return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = EmployeeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        employee = Employees.objects.get(EmployeeId=id)
+        serializer = EmployeeSerializer(employee, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        employee = Employees.objects.get(EmployeeId=id)
         employee.delete()
-        return JsonResponse("Deleted Successfully",safe=False)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-@csrf_exempt
+
+@api_view(['POST'])
 def SaveFile(request):
-    file=request.FILES['file']
-    file_name=default_storage.save(file.name,file)
-    return JsonResponse(file_name,safe=False)
+    file = request.FILES['file']
+    file_name = default_storage.save(file.name, file)
+    return Response(file_name, status=status.HTTP_200_OK)

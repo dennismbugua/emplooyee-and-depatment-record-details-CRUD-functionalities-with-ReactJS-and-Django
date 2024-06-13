@@ -2,10 +2,17 @@ import React, { useState, useEffect, useCallback } from "react";
 import { variables } from "./Variables.js";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import "./index.css"; // Assuming styles.css contains the custom CSS
 
 const ItemType = "DEPARTMENT";
 
-const DraggableRow = ({ dep, index, moveRow, handleEditClick, handleDeleteClick }) => {
+const DraggableRow = ({
+  dep,
+  index,
+  moveRow,
+  handleEditClick,
+  handleDeleteClick,
+}) => {
   const ref = React.useRef(null);
 
   const [{ isDragging }, drag] = useDrag({
@@ -30,7 +37,8 @@ const DraggableRow = ({ dep, index, moveRow, handleEditClick, handleDeleteClick 
       }
 
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
@@ -68,7 +76,7 @@ const DraggableRow = ({ dep, index, moveRow, handleEditClick, handleDeleteClick 
             className="bi bi-pencil-square"
             viewBox="0 0 16 16"
           >
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0L9.5 3.207 6.354 6.354a.5.5 0 0 1-.708-.708L8.793 2.5l-1-1a.5.5 0 0 1 .708-.708l1 1 1.707-1.707a.5.5 0 0 1 .707 0l3 3a.5.5 0 0 1 .207.44v.07zM1 13.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .354-.146l10-10a.5.5 0 0 0 0-.708l-1-1a.5.5 0 0 0-.707 0l-10 10A.5.5 0 0 0 1 13.5zm3-3v1a.5.5 0 0 1-1 0v-1h1zm0-1H3v1h1V9zm0-1H3v1h1V8zm0-1H3v1h1V7zm0-1H3v1h1V6zm0-1H3v1h1V5zm0-1H3v1h1V4zm0-1H3v1h1V3zm0-1H3v1h1V2zm0-1H3v1h1V1zm0-1H3v1h1V0zm11 12h1a.5.5 0 0 1 0 1h-1v-1zm-1-1h1v1h-1v-1zm-1-1h1v1h-1v-1zm-1-1h1v1h-1v-1zm-1-1h1v1h-1v-1zm-1-1h1v1h-1V0z" />
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.708 0L9.5 3.207 6.354 6.354a.5.5 0 0 1-.708-.708L8.793 2.5l-1-1a.5.5 0 0 1 .708-.708l1 1 1.707-1.707a.5.5 0 0 1 .707 0l3 3a.5.5 0 0 1 .207.44v.07zM1 13.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .354-.146l10-10a.5.5 0 0 0 0-.708l-1-1a.5.5 0 0 0-.707 0l-10 10A.5.5 0 0 0 1 13.5zm3-3v1a.5.5 0 0 1-1 0v-1h1zm0-1H3v1h1V9zm0-1H3v1h1V8zm0-1H3v1h1V7zm0-1H3v1h1V6zm0-1H3v1h1V5zm0-1H3v1h1V4zm0-1H3v1h1V3zm0-1H3v1h1V2zm0-1H3v1h1V1zm0-1H3v1h1V0zm11 12h1a.5.5 0 0 1 0 1h-1v-1zm-1-1h1v1h-1v-1zm-1-1h1v1h-1v-1zm-1-1h1v1h-1v-1zm-1-1h1v1h-1V0z" />
           </svg>
         </button>
         <button
@@ -117,9 +125,14 @@ const Department = () => {
   };
 
   const filterFn = () => {
-    const filteredData = departmentsWithoutFilter.filter((el) =>
-      el.DepartmentId.toString().toLowerCase().includes(departmentIdFilter.toLowerCase().trim()) &&
-      el.DepartmentName.toString().toLowerCase().includes(departmentNameFilter.toLowerCase().trim())
+    const filteredData = departmentsWithoutFilter.filter(
+      (el) =>
+        el.DepartmentId.toString()
+          .toLowerCase()
+          .includes(departmentIdFilter.toLowerCase().trim()) &&
+        el.DepartmentName.toString()
+          .toLowerCase()
+          .includes(departmentNameFilter.toLowerCase().trim())
     );
     setDepartments(filteredData);
   };

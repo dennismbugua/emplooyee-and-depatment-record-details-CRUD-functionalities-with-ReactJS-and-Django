@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { variables } from "./Variables.js";
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import DraggableRow from './DraggableRow';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import DraggableRow from "./DraggableRow";
 import "./index.css";
 
 export const Employee = () => {
@@ -14,7 +14,7 @@ export const Employee = () => {
     EmployeeName: "",
     Department: "",
     DateOfJoining: "",
-    PhotoFileName: "anonymous.png",
+    PhotoFileName: "anonymous.jpg",
   });
   const [photoPath, setPhotoPath] = useState(variables.PHOTO_URL);
 
@@ -51,7 +51,7 @@ export const Employee = () => {
       EmployeeName: "",
       Department: "",
       DateOfJoining: "",
-      PhotoFileName: "anonymous.png",
+      PhotoFileName: "anonymous.jpg",
     });
   };
 
@@ -214,7 +214,12 @@ export const Employee = () => {
         </div>
       </DndProvider>
 
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        aria-hidden="true"
+      >
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
@@ -250,7 +255,10 @@ export const Employee = () => {
                       onChange={handleChange}
                     >
                       {departments.map((dep) => (
-                        <option key={dep.DepartmentId} value={dep.DepartmentName}>
+                        <option
+                          key={dep.DepartmentId}
+                          value={dep.DepartmentName}
+                        >
                           {dep.DepartmentName}
                         </option>
                       ))}
