@@ -11,6 +11,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def departmentApi(request, id=None):
     if request.method == 'GET':
@@ -28,7 +29,7 @@ def departmentApi(request, id=None):
             logger.debug("GET request for all departments")
             serializer = DepartmentSerializer(departments, many=True)
             return Response(serializer.data)
-    
+
     elif request.method == 'POST':
         logger.debug(f"POST request with data={request.data}")
         serializer = DepartmentSerializer(data=request.data)
@@ -38,7 +39,7 @@ def departmentApi(request, id=None):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         logger.error(f"Validation errors: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     elif request.method == 'PUT':
         if id is None:
             logger.error("PUT request with id=None")
@@ -57,7 +58,7 @@ def departmentApi(request, id=None):
             return Response(serializer.data)
         logger.error(f"Validation errors: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     elif request.method == 'DELETE':
         if id is None:
             logger.error("DELETE request with id=None")
@@ -90,7 +91,7 @@ def employeeApi(request, id=None):
             logger.debug("GET request for all employees")
             serializer = EmployeeSerializer(employees, many=True)
             return Response(serializer.data)
-    
+
     elif request.method == 'POST':
         logger.debug(f"POST request with data={request.data}")
         serializer = EmployeeSerializer(data=request.data)
@@ -100,7 +101,7 @@ def employeeApi(request, id=None):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         logger.error(f"Validation errors: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     elif request.method == 'PUT':
         if id is None:
             logger.error("PUT request with id=None")
@@ -119,7 +120,7 @@ def employeeApi(request, id=None):
             return Response(serializer.data)
         logger.error(f"Validation errors: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     elif request.method == 'DELETE':
         if id is None:
             logger.error("DELETE request with id=None")

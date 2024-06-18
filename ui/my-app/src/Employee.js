@@ -66,41 +66,13 @@ export const Employee = () => {
     });
   };
 
-
-  // const handleSaveClick = async () => {
-  //   const method = employeeDetails.EmployeeId === 0 ? "POST" : "PUT";
-  //   const url =
-  //     employeeDetails.EmployeeId === 0
-  //       ? variables.API_URL + "employee"
-  //       : variables.API_URL + "employee/" + employeeDetails.EmployeeId;
-
-  //   try {
-  //     const response = await fetch(url, {
-  //       method,
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(employeeDetails),
-  //     });
-  //     const result = await response.json();
-  //     alert(result);
-  //     refreshList();
-  //   } catch (error) {
-  //     alert("Failed to save data");
-  //   }
-  // };
-
-
-
-
   const handleSaveClick = async () => {
     const method = employeeDetails.EmployeeId === 0 ? "POST" : "PUT";
     const url =
       employeeDetails.EmployeeId === 0
         ? variables.API_URL + "employee"
         : variables.API_URL + "employee/" + employeeDetails.EmployeeId;
-  
+
     try {
       const response = await fetch(url, {
         method,
@@ -110,11 +82,10 @@ export const Employee = () => {
         },
         body: JSON.stringify(employeeDetails),
       });
-  
+
       if (response.ok) {
         await response.json();
         refreshList();
-        // Close the modal by triggering the close button's click event
         document.getElementById("modalCloseButton").click();
       } else {
         alert("Failed to save data");
@@ -123,9 +94,7 @@ export const Employee = () => {
       alert("Failed to save data");
     }
   };
-  
 
-  
   const handleDeleteClick = async (id) => {
     if (window.confirm("Are you sure?")) {
       try {
@@ -160,7 +129,6 @@ export const Employee = () => {
         ...prevDetails,
         PhotoFileName: data,
       }));
-      // Ensure to update the image path after successful upload
       setPhotoPath(variables.PHOTO_URL + data);
     } catch (error) {
       alert("Failed to upload image");
@@ -246,7 +214,7 @@ export const Employee = () => {
                         className="bi bi-trash-fill"
                         viewBox="0 0 16 16"
                       >
-                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5V5zm2-3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1H7v-1zm-4.5.5v-1a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1h-2z" />
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5z" />
                       </svg>
                     </button>
                   </td>
@@ -256,211 +224,86 @@ export const Employee = () => {
           </table>
         </div>
       </DndProvider>
-
-
-
-
-
-
-
-
-
-
-
-      {/* <div
+      <div
         className="modal fade"
         id="exampleModal"
         tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">{modalTitle}</h5>
+              <h5 className="modal-title" id="exampleModalLabel">
+                {modalTitle}
+              </h5>
               <button
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                id="modalCloseButton"
               ></button>
             </div>
-
             <div className="modal-body">
-              <div className="d-flex flex-row bd-highlight mb-3">
-                <div className="p-2 w-50 bd-highlight">
-                  <div className="input-group mb-3">
-                    <span className="input-group-text">Emp Name</span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="EmployeeName"
-                      value={employeeDetails.EmployeeName}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="input-group mb-3">
-                    <span className="input-group-text">Department</span>
-                    <select
-                      className="form-select"
-                      name="Department"
-                      value={employeeDetails.Department}
-                      onChange={handleChange}
-                    >
-                      {departments.map((dep) => (
-                        <option
-                          key={dep.DepartmentId}
-                          value={dep.DepartmentName}
-                        >
-                          {dep.DepartmentName}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="input-group mb-3">
-                    <span className="input-group-text">Joined</span>
-                    <input
-                      type="date"
-                      className="form-control"
-                      name="DateOfJoining"
-                      value={employeeDetails.DateOfJoining}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="p-2 w-50 bd-highlight">
-                  <img
-                    width="250px"
-                    height="250px"
-                    src={photoPath + employeeDetails.PhotoFileName}
-                    alt="Employee"
-                    onError={(e) =>
-                      (e.target.src = photoPath + "anonymous.jpg")
-                    }
-                  />
-                  <input
-                    className="m-2"
-                    type="file"
-                    onChange={handleImageUpload}
-                  />
-                </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text">Employee Name</span>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="EmployeeName"
+                  value={employeeDetails.EmployeeName}
+                  onChange={handleChange}
+                />
               </div>
-
+              <div className="input-group mb-3">
+                <span className="input-group-text">Department</span>
+                <select
+                  className="form-control"
+                  name="Department"
+                  value={employeeDetails.Department}
+                  onChange={handleChange}
+                >
+                  {departments.map((dep) => (
+                    <option key={dep.DepartmentId}>{dep.DepartmentName}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text">Date Of Joining</span>
+                <input
+                  type="date"
+                  className="form-control"
+                  name="DateOfJoining"
+                  value={employeeDetails.DateOfJoining}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text">Photo File</span>
+                <input
+                  type="file"
+                  className="form-control"
+                  onChange={handleImageUpload}
+                />
+              </div>
+              {employeeDetails.PhotoFileName && (
+                <img
+                  src={photoPath + employeeDetails.PhotoFileName}
+                  alt="employee"
+                />
+              )}
               <button
                 type="button"
                 className="btn btn-primary float-start"
                 onClick={handleSaveClick}
               >
-                {employeeDetails.EmployeeId === 0 ? "Create" : "Update"}
+                Save
               </button>
             </div>
           </div>
         </div>
-      </div> */}
-
-
-
-
-
-<div
-  className="modal fade"
-  id="exampleModal"
-  tabIndex="-1"
-  aria-hidden="true"
->
-  <div className="modal-dialog modal-lg modal-dialog-centered">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title">{modalTitle}</h5>
-        <button
-          type="button"
-          className="btn-close"
-          id="modalCloseButton"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
       </div>
-
-      <div className="modal-body">
-        <div className="d-flex flex-row bd-highlight mb-3">
-          <div className="p-2 w-50 bd-highlight">
-            <div className="input-group mb-3">
-              <span className="input-group-text">Emp Name</span>
-              <input
-                type="text"
-                className="form-control"
-                name="EmployeeName"
-                value={employeeDetails.EmployeeName}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-group mb-3">
-              <span className="input-group-text">Department</span>
-              <select
-                className="form-select"
-                name="Department"
-                value={employeeDetails.Department}
-                onChange={handleChange}
-              >
-                {departments.map((dep) => (
-                  <option
-                    key={dep.DepartmentId}
-                    value={dep.DepartmentName}
-                  >
-                    {dep.DepartmentName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="input-group mb-3">
-              <span className="input-group-text">Joined</span>
-              <input
-                type="date"
-                className="form-control"
-                name="DateOfJoining"
-                value={employeeDetails.DateOfJoining}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="p-2 w-50 bd-highlight">
-            <img
-              width="250px"
-              height="250px"
-              src={photoPath + employeeDetails.PhotoFileName}
-              alt="Employee"
-              onError={(e) =>
-                (e.target.src = photoPath + "anonymous.jpg")
-              }
-            />
-            <input
-              className="m-2"
-              type="file"
-              onChange={handleImageUpload}
-            />
-          </div>
-        </div>
-
-        <button
-          type="button"
-          className="btn btn-primary float-end"
-          onClick={handleSaveClick}
-        >
-          {employeeDetails.EmployeeId === 0 ? "Create" : "Update"}
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
     </div>
   );
 };
