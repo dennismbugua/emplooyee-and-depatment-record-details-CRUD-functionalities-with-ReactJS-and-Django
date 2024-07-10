@@ -3,12 +3,18 @@ import { variables } from "./Variables.js";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import "./index.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ItemType = "DEPARTMENT";
 
-const DraggableRow = ({ dep, index, moveRow, handleEditClick, handleDeleteClick }) => {
+const DraggableRow = ({
+  dep,
+  index,
+  moveRow,
+  handleEditClick,
+  handleDeleteClick,
+}) => {
   const ref = React.useRef(null);
 
   const [{ isDragging }, drag] = useDrag({
@@ -33,7 +39,8 @@ const DraggableRow = ({ dep, index, moveRow, handleEditClick, handleDeleteClick 
       }
 
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
@@ -109,8 +116,12 @@ const Department = () => {
   const filterFn = () => {
     const filteredData = departmentsWithoutFilter.filter(
       (el) =>
-        el.DepartmentId.toString().toLowerCase().includes(departmentIdFilter.toLowerCase().trim()) &&
-        el.DepartmentName.toString().toLowerCase().includes(departmentNameFilter.toLowerCase().trim())
+        el.DepartmentId.toString()
+          .toLowerCase()
+          .includes(departmentIdFilter.toLowerCase().trim()) &&
+        el.DepartmentName.toString()
+          .toLowerCase()
+          .includes(departmentNameFilter.toLowerCase().trim())
     );
     setDepartments(filteredData);
   };
@@ -147,6 +158,8 @@ const Department = () => {
       });
       const result = await response.json();
       alert(result);
+      // Close the modal after creating a new department
+      document.getElementById("modalCloseButton").click();
       refreshList();
     } catch (error) {
       alert("Failed");
@@ -155,20 +168,23 @@ const Department = () => {
 
   const handleUpdateClick = async () => {
     try {
-      const response = await fetch(variables.API_URL + "department/" + departmentId, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          DepartmentId: departmentId,
-          DepartmentName: departmentName,
-        }),
-      });
+      const response = await fetch(
+        variables.API_URL + "department/" + departmentId,
+        {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            DepartmentId: departmentId,
+            DepartmentName: departmentName,
+          }),
+        }
+      );
       const result = await response.json();
       // Close modal
-      document.getElementById('modalCloseButton').click();
+      document.getElementById("modalCloseButton").click();
       refreshList();
     } catch (error) {
       alert("Failed");
@@ -303,12 +319,23 @@ const Department = () => {
           </table>
         </div>
 
-        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex="-1"
+          aria-hidden="true"
+        >
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">{modalTitle}</h5>
-                <button type="button" className="btn-close" id="modalCloseButton" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button
+                  type="button"
+                  className="btn-close"
+                  id="modalCloseButton"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
               <div className="modal-body">
                 <div className="input-group mb-3">
@@ -321,11 +348,19 @@ const Department = () => {
                   />
                 </div>
                 {departmentId === 0 ? (
-                  <button type="button" className="btn btn-primary float-end" onClick={handleCreateClick}>
+                  <button
+                    type="button"
+                    className="btn btn-primary float-end"
+                    onClick={handleCreateClick}
+                  >
                     Create
                   </button>
                 ) : (
-                  <button type="button" className="btn btn-primary float-end" onClick={handleUpdateClick}>
+                  <button
+                    type="button"
+                    className="btn btn-primary float-end"
+                    onClick={handleUpdateClick}
+                  >
                     Update
                   </button>
                 )}
