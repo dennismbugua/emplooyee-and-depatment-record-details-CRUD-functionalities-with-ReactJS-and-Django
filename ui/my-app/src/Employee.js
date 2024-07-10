@@ -53,6 +53,7 @@ export const Employee = () => {
       DateOfJoining: "",
       PhotoFileName: "anonymous.jpg",
     });
+    setPhotoPath(variables.PHOTO_URL + "anonymous.jpg");
   };
 
   const handleEditClick = (emp) => {
@@ -64,6 +65,7 @@ export const Employee = () => {
       DateOfJoining: emp.DateOfJoining,
       PhotoFileName: emp.PhotoFileName,
     });
+    setPhotoPath(variables.PHOTO_URL + emp.PhotoFileName);
   };
 
   const handleSaveClick = async () => {
@@ -214,7 +216,7 @@ export const Employee = () => {
                         className="bi bi-trash-fill"
                         viewBox="0 0 16 16"
                       >
-                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5z" />
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zM3 4h10v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
                       </svg>
                     </button>
                   </td>
@@ -264,6 +266,9 @@ export const Employee = () => {
                   value={employeeDetails.Department}
                   onChange={handleChange}
                 >
+                  <option value="" disabled>
+                    Select a department
+                  </option>
                   {departments.map((dep) => (
                     <option key={dep.DepartmentId}>{dep.DepartmentName}</option>
                   ))}
@@ -289,16 +294,17 @@ export const Employee = () => {
               </div>
               {employeeDetails.PhotoFileName && (
                 <img
-                  src={photoPath + employeeDetails.PhotoFileName}
+                  src={photoPath}
                   alt="employee"
+                  style={{ width: "100px", height: "100px" }}
                 />
               )}
               <button
                 type="button"
-                className="btn btn-primary float-start"
+                className="btn btn-primary float-end"
                 onClick={handleSaveClick}
               >
-                Save
+                {modalTitle === "Add Employee" ? "Save" : "Update"}
               </button>
             </div>
           </div>
