@@ -10,6 +10,7 @@ A modern, full-stack web application for managing employees and departments with
 - **Smooth Animations** and hover effects throughout the application
 - **Toast Notifications** for user feedback
 - **Confirmation Modals** for critical actions
+![alt text](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2Fe230ccb64fa75bd24cd43e7a72a525545f3c4d2c-1698x936.png&w=640&q=75)
 
 ### 👥 **Employee Management**
 - ✅ Create, Read, Update, Delete (CRUD) operations
