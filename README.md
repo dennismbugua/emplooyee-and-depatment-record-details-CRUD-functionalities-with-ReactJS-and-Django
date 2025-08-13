@@ -20,7 +20,7 @@ A modern, full-stack web application for managing employees and departments with
 - 🎯 Drag & drop functionality for reordering
 - 📊 Real-time statistics and dashboard
 
-![Employee Management](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2F0053dd2f5d10b505644f865a654c99b474b83631-1904x896.gif&w=640&q=75)
+<img width="1904" height="896" alt="image" src="https://github.com/user-attachments/assets/ffd22104-7094-486f-b0fb-4a1a420e86dc" />
 
 ### 🏢 **Department Management**
 - ✅ Full CRUD operations for departments
@@ -29,9 +29,10 @@ A modern, full-stack web application for managing employees and departments with
 - 📈 Department statistics and analytics
 - 🎨 Beautiful card-based layout
 
-![Department Management](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2F6bfb12fc71be031f9425b82d72e150d983f4cf73-1904x896.gif&w=640&q=75)
+<img width="1904" height="896" alt="image" src="https://github.com/user-attachments/assets/636a923b-bf5a-4310-9d55-7db48e33c870" />
 
-![Department Management](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2F1339c9db906d412d5615a29140681ba59d4479f3-1904x896.gif&w=640&q=75)
+
+<img width="1904" height="896" alt="image" src="https://github.com/user-attachments/assets/e7cd875c-e673-4aef-b910-79c6a6755860" />
 
 ### 🔧 **Technical Features**
 - 🚀 Fast React 18 frontend with modern hooks
