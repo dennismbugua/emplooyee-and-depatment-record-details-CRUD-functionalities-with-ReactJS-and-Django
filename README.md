@@ -11,7 +11,7 @@ A modern, full-stack web application for managing employees and departments with
 - **Toast Notifications** for user feedback
 - **Confirmation Modals** for critical actions
 
-![alt text](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2Fe230ccb64fa75bd24cd43e7a72a525545f3c4d2c-1698x936.png&w=640&q=75)
+![UX](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2Fe230ccb64fa75bd24cd43e7a72a525545f3c4d2c-1698x936.png&w=640&q=75)
 
 ### 👥 **Employee Management**
 - ✅ Create, Read, Update, Delete (CRUD) operations
@@ -20,12 +20,18 @@ A modern, full-stack web application for managing employees and departments with
 - 🎯 Drag & drop functionality for reordering
 - 📊 Real-time statistics and dashboard
 
+![Employee Management](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2F0053dd2f5d10b505644f865a654c99b474b83631-1904x896.gif&w=640&q=75)
+
 ### 🏢 **Department Management**
 - ✅ Full CRUD operations for departments
 - 🔢 Filter by department ID (numbers only)
 - 📝 Filter by department name (alphanumeric)
 - 📈 Department statistics and analytics
 - 🎨 Beautiful card-based layout
+
+![Department Management](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2F6bfb12fc71be031f9425b82d72e150d983f4cf73-1904x896.gif&w=640&q=75)
+
+![Department Management](https://dennismbugua.co.ke/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F5qghk7em%2Fblog%2F1339c9db906d412d5615a29140681ba59d4479f3-1904x896.gif&w=640&q=75)
 
 ### 🔧 **Technical Features**
 - 🚀 Fast React 18 frontend with modern hooks
