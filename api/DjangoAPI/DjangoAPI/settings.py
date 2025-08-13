@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import secrets
+from dotenv import load_dotenv
 
 # Paths
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -10,13 +11,39 @@ MEDIA_ROOT = BASE_DIR / "Photos"
 # Security
 SECRET_KEY_FILE = BASE_DIR / 'secret_key.txt'
 
-if SECRET_KEY_FILE.exists():
-    with open(SECRET_KEY_FILE) as f:
-        SECRET_KEY = f.read().strip()
-else:
-    SECRET_KEY = secrets.token_urlsafe(50)
-    with open(SECRET_KEY_FILE, 'w') as f:
-        f.write(SECRET_KEY)
+def get_or_create_secret_key():
+    """Generate or retrieve a secure secret key."""
+    try:
+        if SECRET_KEY_FILE.exists():
+            with open(SECRET_KEY_FILE, 'r') as f:
+                key = f.read().strip()
+                if len(key) >= 50:  # Ensure key is long enough
+                    return key
+        
+        # Generate new secure key
+        new_key = secrets.token_urlsafe(50)
+        
+        # Write key to file with proper permissions
+        with open(SECRET_KEY_FILE, 'w') as f:
+            f.write(new_key)
+        
+        # Set file permissions to be readable only by owner (Unix/Linux)
+        try:
+            os.chmod(SECRET_KEY_FILE, 0o600)
+        except (AttributeError, OSError):
+            pass  # Windows or permission error, continue anyway
+            
+        return new_key
+        
+    except (IOError, OSError) as e:
+        # Fallback to environment variable or generated key
+        env_key = os.environ.get('DJANGO_SECRET_KEY')
+        if env_key:
+            return env_key
+        # Last resort - generate temporary key (not persisted)
+        return secrets.token_urlsafe(50)
+
+SECRET_KEY = get_or_create_secret_key()
 
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -96,6 +123,10 @@ USE_TZ = True
 
 # Static Files
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default Primary Key Field Type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
